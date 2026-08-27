@@ -2,84 +2,84 @@ import React from 'react'
 
 const Cards = ({ image, heading, desc, price }) => {
   return (
-    <div className="card bg-base-100 w-80 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-base-200">
+    <div className="group flex h-full w-full flex-col overflow-hidden rounded-2xl border border-base-300 bg-base-100 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-primary/30 hover:shadow-xl">
 
-      {/* Product Image */}
-      <figure className="h-56 bg-gray-100 p-5">
+      {/* ================= IMAGE ================= */}
+      <figure className="relative h-56 overflow-hidden bg-base-200 p-6">
+
+        {/* New Badge */}
+        <div className="absolute left-4 top-4 z-10">
+          <span className="badge badge-primary font-semibold">
+            New
+          </span>
+        </div>
+
+        {/* Image */}
         <img
           src={image}
           alt={heading}
-          className="h-full w-full object-contain hover:scale-105 transition-transform duration-300"
+          className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
         />
+
       </figure>
 
-      {/* Card Content */}
-      <div className="card-body">
 
-        {/* Title + Badge */}
-        <div className="flex justify-between items-center gap-2">
-          <h2 className="card-title text-xl">
-            {heading}
-          </h2>
+      {/* ================= CONTENT ================= */}
+      <div className="flex flex-1 flex-col p-5">
 
-          <div className="badge badge-primary">
-            New
-          </div>
-        </div>
+        {/* Product Name */}
+        <h2 className="text-xl font-bold tracking-tight">
+          {heading}
+        </h2>
+
 
         {/* Rating */}
-        <div className="rating rating-sm my-1">
-          <input
-            type="radio"
-            name={`rating-${heading}`}
-            className="mask mask-star-2 bg-orange-400"
-          />
+        <div className="mt-2 flex items-center gap-2">
 
-          <input
-            type="radio"
-            name={`rating-${heading}`}
-            className="mask mask-star-2 bg-orange-400"
-            defaultChecked
-          />
+          <div className="flex text-sm text-orange-400">
+            ★★★★★
+          </div>
 
-          <input
-            type="radio"
-            name={`rating-${heading}`}
-            className="mask mask-star-2 bg-orange-400"
-          />
+          <span className="text-xs text-base-content/50">
+            4.8
+          </span>
 
-          <input
-            type="radio"
-            name={`rating-${heading}`}
-            className="mask mask-star-2 bg-orange-400"
-          />
-
-          <input
-            type="radio"
-            name={`rating-${heading}`}
-            className="mask mask-star-2 bg-orange-400"
-          />
         </div>
 
+
         {/* Description */}
-        <p className="text-gray-500 text-sm line-clamp-2">
+        <p className="mt-3 line-clamp-2 min-h-10 text-sm leading-relaxed text-base-content/60">
           {desc}
         </p>
 
-        {/* Price + Button */}
-        <div className="flex justify-between items-center mt-4">
 
-          <span className="text-2xl font-bold text-primary">
-            ₹{Number(price).toLocaleString('en-IN')}
-          </span>
+        {/* ================= PRICE ================= */}
+        <div className="mt-auto pt-5">
 
-          <button className="btn btn-primary btn-sm">
-            Buy Now
+          <div className="mb-4 flex items-center justify-between">
+
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wider text-base-content/40">
+                Price
+              </p>
+
+              <p className="mt-1 text-2xl font-black text-primary">
+                ₹{Number(price).toLocaleString('en-IN')}
+              </p>
+            </div>
+
+          </div>
+
+
+          {/* Button */}
+          <button className="btn btn-primary w-full rounded-xl">
+            🛒 Add to Cart
           </button>
 
         </div>
 
       </div>
+
     </div>
   )
 }

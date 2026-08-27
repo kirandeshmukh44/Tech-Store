@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import Navbar from '../Components/Navbar'
-import Footer from '../Components/Footer'
 
 const Login = () => {
 
@@ -18,8 +16,6 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-base-200">
-
-      <Navbar />
 
       {/* Login Section */}
       <section className="min-h-[80vh] flex items-center justify-center px-6 py-12">
@@ -151,9 +147,6 @@ const Login = () => {
         </div>
 
       </section>
-
-
-      <Footer />
 
     </div>
   )

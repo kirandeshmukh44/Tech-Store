@@ -1,9 +1,10 @@
-import laptop from '../assets/laptop.png'
+import laptop from "../assets/laptop.png";
 import phone from "../assets/Phone.png";
 import tab from "../assets/Tab.png";
 import tv from "../assets/Tv.png";
 import watch from "../assets/Watch.png";
 import keyboard from "../assets/Keyboard.png";
+
 
 
 const products = [

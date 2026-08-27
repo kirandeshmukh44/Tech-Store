@@ -1,4 +1,4 @@
-import laptop from '../assets/Laptop.png'
+import laptop from '../assets/laptop.png'
 import phone from "../assets/Phone.png";
 import tab from "../assets/Tab.png";
 import tv from "../assets/Tv.png";

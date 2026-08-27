@@ -1,10 +1,10 @@
-import laptop from '../assets/laptop.png'
-import phone from '../assets/phone.png'
-import tab from '../assets/tab.png'
-import tv from '../assets/tv.png'
-import watch from '../assets/watch.png'
-import earburd from '../assets/Earburd.png'
-import keyboard from '../assets/keyboard.png'
+import laptop from '../assets/Laptop.png'
+import phone from "../assets/Phone.png";
+import tab from "../assets/Tab.png";
+import tv from "../assets/Tv.png";
+import watch from "../assets/Watch.png";
+import keyboard from "../assets/Keyboard.png";
+
 
 const products = [
   {

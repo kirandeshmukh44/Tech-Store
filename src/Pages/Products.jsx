@@ -4,15 +4,21 @@ import Cards from '../Components/Cards'
 import products from '../Props/Carddata'
 
 const Products = () => {
+
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('All')
 
+
+  // Create categories dynamically
   const categories = [
     'All',
     ...new Set(products.map((product) => product.category)),
   ]
 
+
+  // Filter products
   const filteredProducts = products.filter((product) => {
+
     const matchesSearch = product.heading
       .toLowerCase()
       .includes(search.toLowerCase())
@@ -24,10 +30,13 @@ const Products = () => {
     return matchesSearch && matchesCategory
   })
 
+
   return (
     <div className="min-h-screen bg-base-200">
 
+
       {/* ================= HERO ================= */}
+
       <section className="bg-base-100">
 
         <div className="mx-auto max-w-7xl px-6 py-16 text-center md:py-20">
@@ -37,33 +46,44 @@ const Products = () => {
           </p>
 
           <h1 className="mt-3 text-4xl font-black md:text-5xl">
+
             Our{' '}
+
             <span className="text-primary">
               Products
             </span>
+
           </h1>
 
           <p className="mx-auto mt-4 max-w-2xl text-base text-base-content/60 md:text-lg">
             Discover the latest technology products,
             gadgets and accessories for your digital lifestyle.
           </p>
+
         </div>
+
       </section>
 
 
       {/* ================= PRODUCTS ================= */}
+
       <section className="mx-auto max-w-7xl px-5 py-14 sm:px-6 lg:px-8">
 
-        {/* Search */}
+
+        {/* ================= SEARCH ================= */}
+
         <div className="mx-auto max-w-2xl">
+
           <SearchBar
             search={search}
             setSearch={setSearch}
           />
+
         </div>
 
 
         {/* ================= CATEGORY ================= */}
+
         <div className="mt-8 flex flex-wrap justify-center gap-3">
 
           {categories.map((item) => (
@@ -79,11 +99,14 @@ const Products = () => {
             >
               {item}
             </button>
+
           ))}
+
         </div>
 
 
         {/* ================= HEADER ================= */}
+
         <div className="mt-12 flex flex-col gap-2 border-b border-base-300 pb-5 sm:flex-row sm:items-end sm:justify-between">
 
           <div>
@@ -95,20 +118,26 @@ const Products = () => {
             <h2 className="mt-1 text-2xl font-bold">
               Featured Products
             </h2>
+
           </div>
 
+
           <p className="text-sm text-base-content/60">
+
             Showing{' '}
 
             <span className="font-bold text-base-content">
               {filteredProducts.length}
             </span>
+
             {' '}products
+
           </p>
+
         </div>
 
 
-        {/* ================= CARDS ================= */}
+        {/* ================= PRODUCT CARDS ================= */}
 
         {filteredProducts.length > 0 ? (
 
@@ -131,14 +160,14 @@ const Products = () => {
                 className="w-full"
               >
 
+                {/* Product Card */}
+
                 <Cards
-                  image={product.image}
-                  heading={product.heading}
-                  desc={product.desc}
-                  price={product.price}
-                  category={product.category}
+                  product={product}
                 />
+
               </div>
+
             ))}
 
           </div>
@@ -171,18 +200,19 @@ const Products = () => {
             >
               Clear Filters
             </button>
+
           </div>
 
         )}
+
       </section>
 
 
       {/* ================= CTA ================= */}
 
       <section className="bg-primary text-primary-content">
+
         <div className="mx-auto max-w-4xl px-6 py-16 text-center">
-          <div className="text-4xl">
-          </div>
 
           <h2 className="mt-4 text-3xl font-bold md:text-4xl">
             Upgrade Your Tech
@@ -192,8 +222,11 @@ const Products = () => {
             Discover reliable and modern technology products
             at TechStore.
           </p>
+
         </div>
+
       </section>
+
     </div>
   )
 }

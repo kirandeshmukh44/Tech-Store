@@ -12,42 +12,106 @@ import Home from './Pages/Home.jsx'
 import About from './Pages/About.jsx'
 import Contact from './Pages/Contact.jsx'
 import Products from './Pages/Products.jsx'
+import Cart from './Pages/Cart.jsx'
+
 import Layout from './Layout.jsx'
 import Register from './Pages/Register.jsx'
 import Login from './Pages/Login.jsx'
 import Welcome from './Pages/Welcome.jsx'
+
 import { CartProvider } from './Context/CartContext'
 
 
 const AppRouter = () => {
+
   return (
+
     <BrowserRouter>
 
       <Routes>
 
-        {/* Welcome */}
-        <Route path="/" element={<Welcome />} />
+        {/* ================= WELCOME PAGE ================= */}
 
-        {/* Authentication */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route
+          path="/"
+          element={<Welcome />}
+        />
 
-        {/* Main Website */}
-        <Route path="/" element={<Layout />}>
-          <Route path="home" element={<Home />} />
-          <Route path="products" element={<Products />} />
-          <Route path="about" element={<About />} />
-          <Route path="contact" element={<Contact />} />
+
+        {/* ================= AUTHENTICATION ================= */}
+
+        <Route
+          path="/login"
+          element={<Login />}
+        />
+
+        <Route
+          path="/register"
+          element={<Register />}
+        />
+
+
+        {/* ================= MAIN WEBSITE ================= */}
+
+        <Route element={<Layout />}>
+
+          {/* Home */}
+
+          <Route
+            path="/home"
+            element={<Home />}
+          />
+
+
+          {/* Products */}
+
+          <Route
+            path="/products"
+            element={<Products />}
+          />
+
+
+          {/* About */}
+
+          <Route
+            path="/about"
+            element={<About />}
+          />
+
+
+          {/* Contact */}
+
+          <Route
+            path="/contact"
+            element={<Contact />}
+          />
+
+
+          {/* Cart */}
+
+          <Route
+            path="/cart"
+            element={<Cart />}
+          />
+
         </Route>
 
       </Routes>
 
     </BrowserRouter>
+
   )
 }
 
+
 createRoot(document.getElementById('root')).render(
+
   <StrictMode>
-    <AppRouter />
-  </StrictMode>,
+
+    <CartProvider>
+      <AppRouter />
+    </CartProvider>
+
+  </StrictMode>
+
 )

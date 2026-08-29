@@ -1,23 +1,33 @@
 import React from 'react'
+import { useCart } from '../Context/CartContext'
 
-const Cards = ({ image, heading, desc, price }) => {
+const Cards = ({ product }) => {
+
+  const { addToCart } = useCart()
+
   return (
     <div className="group flex h-full w-full flex-col overflow-hidden rounded-2xl border border-base-300 bg-base-100 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-primary/30 hover:shadow-xl">
 
       {/* ================= IMAGE ================= */}
+
       <figure className="relative h-56 overflow-hidden bg-base-200 p-6">
 
         {/* New Badge */}
+
         <div className="absolute left-4 top-4 z-10">
+
           <span className="badge badge-primary font-semibold">
             New
           </span>
+
         </div>
 
+
         {/* Image */}
+
         <img
-          src={image}
-          alt={heading}
+          src={product.image}
+          alt={product.heading}
           className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
         />
 
@@ -25,15 +35,18 @@ const Cards = ({ image, heading, desc, price }) => {
 
 
       {/* ================= CONTENT ================= */}
+
       <div className="flex flex-1 flex-col p-5">
 
         {/* Product Name */}
+
         <h2 className="text-xl font-bold tracking-tight">
-          {heading}
+          {product.heading}
         </h2>
 
 
         {/* Rating */}
+
         <div className="mt-2 flex items-center gap-2">
 
           <div className="flex text-sm text-orange-400">
@@ -48,31 +61,35 @@ const Cards = ({ image, heading, desc, price }) => {
 
 
         {/* Description */}
+
         <p className="mt-3 line-clamp-2 min-h-10 text-sm leading-relaxed text-base-content/60">
-          {desc}
+          {product.desc}
         </p>
 
 
         {/* ================= PRICE ================= */}
+
         <div className="mt-auto pt-5">
 
-          <div className="mb-4 flex items-center justify-between">
+          <div className="mb-4">
 
-            <div>
-              <p className="text-xs font-medium uppercase tracking-wider text-base-content/40">
-                Price
-              </p>
+            <p className="text-xs font-medium uppercase tracking-wider text-base-content/40">
+              Price
+            </p>
 
-              <p className="mt-1 text-2xl font-black text-primary">
-                ₹{Number(price).toLocaleString('en-IN')}
-              </p>
-            </div>
+            <p className="mt-1 text-2xl font-black text-primary">
+              ₹{Number(product.price).toLocaleString('en-IN')}
+            </p>
 
           </div>
 
 
-          {/* Button */}
-          <button className="btn btn-primary w-full rounded-xl">
+          {/* Add To Cart */}
+
+          <button
+            onClick={() => addToCart(product)}
+            className="btn btn-primary w-full rounded-xl"
+          >
             🛒 Add to Cart
           </button>
 

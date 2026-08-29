@@ -123,13 +123,10 @@ const Contact = () => {
                         {item.description}
                       </p>
                     </div>
-
                   </div>
                 </div>
               ))}
-
             </div>
-
           </div>
 
           {/* Right Side - Form */}
@@ -222,13 +219,9 @@ const Contact = () => {
               >
                 Send Message →
               </button>
-
             </form>
-
           </div>
-
         </div>
-
       </section>
 
       {/* Bottom CTA */}
@@ -248,11 +241,8 @@ const Contact = () => {
             Your questions and feedback matter to us.
             Don't hesitate to reach out.
           </p>
-
         </div>
-
       </section>
-
     </div>
   )
 }

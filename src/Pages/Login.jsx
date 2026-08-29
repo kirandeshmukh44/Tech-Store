@@ -1,155 +1,309 @@
 import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../firebase/firebaseConfig'
 
 const Login = () => {
+    const navigate = useNavigate()
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState('')
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+    const handleLogin = async (e) => {
+        e.preventDefault()
 
-    console.log('Email:', email)
-    console.log('Password:', password)
+        setError('')
+        setLoading(true)
 
-    alert('Login submitted!')
-  }
+        try {
+            await signInWithEmailAndPassword(auth, email, password)
 
-  return (
-    <div className="min-h-screen bg-base-200">
+            navigate('/home')
+        } catch (error) {
+            console.log(error)
 
-      {/* Login Section */}
-      <section className="min-h-[80vh] flex items-center justify-center px-6 py-12">
+            if (error.code === 'auth/invalid-credential') {
+                setError('Invalid email or password.')
+            } else if (error.code === 'auth/invalid-email') {
+                setError('Please enter a valid email address.')
+            } else {
+                setError('Unable to login. Please try again.')
+            }
+        } finally {
+            setLoading(false)
+        }
+    }
 
-        <div className="w-full max-w-md">
+    return (
+        <div className="min-h-screen bg-base-200 relative overflow-hidden flex items-center justify-center px-4 py-10">
 
-          {/* Heading */}
-          <div className="text-center mb-8">
+            {/* Animated Background */}
+            <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-primary/20 blur-3xl animate-pulse" />
 
-            <h1 className="text-4xl font-bold">
-              Welcome <span className="text-primary">Back!</span>
-            </h1>
+            <div className="absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full bg-secondary/20 blur-3xl animate-pulse" />
 
-            <p className="text-base-content/60 mt-2">
-              Login to your TechStore account
-            </p>
+            <div className="relative w-full max-w-6xl">
 
-          </div>
+                <div className="grid lg:grid-cols-2 overflow-hidden rounded-[2rem] border border-base-300 bg-base-100 shadow-2xl">
 
+                    {/* LEFT SIDE */}
+                    <div className="hidden lg:flex relative overflow-hidden bg-primary text-primary-content p-12 flex-col justify-between">
 
-          {/* Card */}
-          <div className="card bg-base-100 shadow-xl">
+                        {/* Glow */}
+                        <div className="absolute -top-20 -right-20 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
 
-            <form
-              onSubmit={handleSubmit}
-              className="card-body"
-            >
+                        <div className="relative z-10">
 
-              <h2 className="card-title text-2xl mb-4">
-                Login
-              </h2>
+                            <div className="flex items-center gap-3">
 
+                                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white/15 text-2xl backdrop-blur">
+                                    🚀
+                                </div>
 
-              {/* Email */}
-              <div className="form-control">
+                                <div>
+                                    <h2 className="text-xl font-black">
+                                        TechStore
+                                    </h2>
 
-                <label className="label">
-                  <span className="label-text">
-                    Email Address
-                  </span>
-                </label>
+                                    <p className="text-xs opacity-70">
+                                        Your Digital World
+                                    </p>
+                                </div>
 
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="input input-bordered w-full"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
+                            </div>
 
-              </div>
+                        </div>
 
+                        <div className="relative z-10">
 
-              {/* Password */}
-              <div className="form-control">
+                            <p className="text-sm font-semibold uppercase tracking-widest opacity-70">
+                                Welcome Back
+                            </p>
 
-                <label className="label">
+                            <h1 className="mt-4 text-5xl font-black leading-tight">
+                                Your Tech.
+                                <br />
+                                Your World.
+                            </h1>
 
-                  <span className="label-text">
-                    Password
-                  </span>
+                            <p className="mt-6 max-w-md text-primary-content/75 leading-relaxed">
+                                Discover the latest technology, powerful devices,
+                                smart accessories and everything you need for your
+                                digital lifestyle.
+                            </p>
 
-                  <a className="label-text-alt link link-primary">
-                    Forgot password?
-                  </a>
+                            <div className="mt-8 flex gap-3 flex-wrap">
 
-                </label>
+                                <div className="badge badge-lg bg-white/10 border-white/20 text-white">
+                                    ⚡ Latest Technology
+                                </div>
 
-                <input
-                  type="password"
-                  placeholder="Enter your password"
-                  className="input input-bordered w-full"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
+                                <div className="badge badge-lg bg-white/10 border-white/20 text-white">
+                                    🔒 Secure Shopping
+                                </div>
 
-              </div>
+                            </div>
 
+                        </div>
 
-              {/* Remember Me */}
-              <div className="form-control mt-2">
+                        <div className="relative z-10 text-sm opacity-60">
+                            © 2026 TechStore. All rights reserved.
+                        </div>
 
-                <label className="label cursor-pointer justify-start gap-3">
+                    </div>
 
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-primary"
-                  />
+                    {/* RIGHT SIDE */}
+                    <div className="p-7 sm:p-10 lg:p-12">
 
-                  <span className="label-text">
-                    Remember me
-                  </span>
+                        {/* Mobile Logo */}
+                        <div className="lg:hidden text-center mb-8">
 
-                </label>
+                            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-3xl shadow-lg shadow-primary/30">
+                                🚀
+                            </div>
 
-              </div>
+                            <h1 className="mt-4 text-2xl font-black">
+                                TechStore
+                            </h1>
 
+                        </div>
 
-              {/* Login Button */}
-              <button
-                type="submit"
-                className="btn btn-primary w-full mt-4"
-              >
-                Login
-              </button>
+                        {/* Heading */}
+                        <div className="mb-8">
 
+                            <p className="font-semibold tracking-widest text-primary text-sm">
+                                ACCOUNT LOGIN
+                            </p>
 
-              {/* Register */}
-              <div className="divider">
-                OR
-              </div>
+                            <h1 className="mt-2 text-3xl sm:text-4xl font-black">
+                                Welcome Back 👋
+                            </h1>
 
-              <p className="text-center text-sm">
+                            <p className="mt-3 text-base-content/60">
+                                Sign in to continue your TechStore journey.
+                            </p>
 
-                Don't have an account?
+                        </div>
 
-                <span className="text-primary font-semibold ml-1 cursor-pointer">
-                  Register
-                </span>
+                        {/* Error */}
+                        {error && (
+                            <div className="alert alert-error mb-6 shadow-sm">
+                                <span>{error}</span>
+                            </div>
+                        )}
 
-              </p>
+                        <form onSubmit={handleLogin}>
 
-            </form>
+                            {/* Email */}
+                            <div className="form-control">
 
-          </div>
+                                <label className="label">
+                                    <span className="label-text font-bold">
+                                        Email Address
+                                    </span>
+                                </label>
+
+                                <label className="input input-bordered flex items-center gap-3 focus-within:input-primary transition">
+
+                                    <span className="text-xl opacity-60">
+                                        ✉️
+                                    </span>
+
+                                    <input
+                                        type="email"
+                                        placeholder="you@example.com"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        className="grow"
+                                        required
+                                    />
+
+                                </label>
+
+                            </div>
+
+                            {/* Password */}
+                            <div className="form-control mt-5">
+
+                                <div className="flex justify-between items-center">
+
+                                    <label className="label">
+                                        <span className="label-text font-bold">
+                                            Password
+                                        </span>
+                                    </label>
+
+                                    <span className="text-xs text-primary cursor-pointer hover:underline">
+                                        Forgot password?
+                                    </span>
+
+                                </div>
+
+                                <label className="input input-bordered flex items-center gap-3 focus-within:input-primary transition">
+
+                                    <span className="text-xl opacity-60">
+                                        🔒
+                                    </span>
+
+                                    <input
+                                        type={showPassword ? 'text' : 'password'}
+                                        placeholder="Enter your password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        className="grow"
+                                        required
+                                    />
+
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className="text-lg opacity-60 hover:opacity-100"
+                                    >
+                                        {showPassword ? '🙈' : '👁️'}
+                                    </button>
+
+                                </label>
+
+                            </div>
+
+                            {/* Remember */}
+                            <div className="flex items-center gap-2 mt-5">
+
+                                <input
+                                    type="checkbox"
+                                    className="checkbox checkbox-primary checkbox-sm"
+                                />
+
+                                <span className="text-sm text-base-content/60">
+                                    Remember me
+                                </span>
+
+                            </div>
+
+                            {/* Login Button */}
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="btn btn-primary btn-lg w-full mt-7 shadow-xl shadow-primary/20 transition hover:scale-[1.02]"
+                            >
+
+                                {loading ? (
+                                    <>
+                                        <span className="loading loading-spinner" />
+                                        Signing In...
+                                    </>
+                                ) : (
+                                    <>
+                                        Sign In
+                                        <span className="text-xl">→</span>
+                                    </>
+                                )}
+
+                            </button>
+
+                        </form>
+
+                        {/* Divider */}
+                        <div className="divider my-8">
+                            OR
+                        </div>
+
+                        {/* Register */}
+                        <div className="text-center">
+
+                            <p className="text-base-content/60">
+                                Don't have an account?
+                            </p>
+
+                            <Link
+                                to="/register"
+                                className="btn btn-outline btn-primary mt-3 w-full"
+                            >
+                                Create New Account
+                            </Link>
+
+                        </div>
+
+                        <div className="mt-8 text-center">
+                            <Link
+                                to="/"
+                                className="text-sm text-base-content/50 hover:text-primary transition"
+                            >
+                                ← Back to Welcome
+                            </Link>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
-
-      </section>
-
-    </div>
-  )
+    )
 }
 
 export default Login

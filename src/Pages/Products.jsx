@@ -47,9 +47,7 @@ const Products = () => {
             Discover the latest technology products,
             gadgets and accessories for your digital lifestyle.
           </p>
-
         </div>
-
       </section>
 
 
@@ -81,9 +79,7 @@ const Products = () => {
             >
               {item}
             </button>
-
           ))}
-
         </div>
 
 
@@ -99,21 +95,16 @@ const Products = () => {
             <h2 className="mt-1 text-2xl font-bold">
               Featured Products
             </h2>
-
           </div>
 
           <p className="text-sm text-base-content/60">
-
             Showing{' '}
 
             <span className="font-bold text-base-content">
               {filteredProducts.length}
             </span>
-
             {' '}products
-
           </p>
-
         </div>
 
 
@@ -147,9 +138,7 @@ const Products = () => {
                   price={product.price}
                   category={product.category}
                 />
-
               </div>
-
             ))}
 
           </div>
@@ -182,22 +171,17 @@ const Products = () => {
             >
               Clear Filters
             </button>
-
           </div>
 
         )}
-
       </section>
 
 
       {/* ================= CTA ================= */}
 
       <section className="bg-primary text-primary-content">
-
         <div className="mx-auto max-w-4xl px-6 py-16 text-center">
-
           <div className="text-4xl">
-            ⚡
           </div>
 
           <h2 className="mt-4 text-3xl font-bold md:text-4xl">
@@ -208,11 +192,8 @@ const Products = () => {
             Discover reliable and modern technology products
             at TechStore.
           </p>
-
         </div>
-
       </section>
-
     </div>
   )
 }

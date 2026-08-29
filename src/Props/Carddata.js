@@ -4,6 +4,13 @@ import tab from '../assets/Tab.png'
 import tv from '../assets/Tv.png'
 import watch from '../assets/Watch.png'
 import keyboard from '../assets/Keyboard.png'
+import camera from '../assets/Camera.png'
+import smartGlasses from '../assets/SmartGlass.png'
+import mouse from '../assets/Mouse.png'
+import printer from '../assets/Printer.png'
+import scanner from '../assets/Scanner.png'
+import smartRing from '../assets/SmartRing.png'
+
 
 const products = [
   {
@@ -54,6 +61,56 @@ const products = [
     price: 1499,
     category: 'Accessories',
   },
+  {
+    id: 7,
+    image: camera,
+    heading: 'Digital Camera',
+    desc: 'Capture high-quality photos and videos with a powerful digital camera designed for photography and everyday memories.',
+    price: 45999,
+    category: 'Cameras',
+  },
+  {
+    id: 8,
+    image: smartGlasses,
+    heading: 'AI Smart Glasses',
+    desc: 'Next-generation smart glasses with intelligent features, hands-free controls, audio, and a stylish lightweight design.',
+    price: 19999,
+    category: 'Wearable Technology',
+  },
+  {
+    id: 9,
+    image: mouse,
+    heading: 'Wireless Mouse',
+    desc: 'Smooth and responsive wireless mouse with an ergonomic design, perfect for work, study, gaming, and everyday use.',
+    price: 1299,
+    category: 'Accessories',
+  },
+  {
+    id: 10,
+    image: printer,
+    heading: 'All-in-One Printer',
+    desc: 'Versatile all-in-one printer for high-quality printing, scanning, and copying at home or in the office.',
+    price: 8999,
+    category: 'Printers',
+  },
+  {
+    id: 11,
+    image: scanner,
+    heading: 'Document Scanner',
+    desc: 'Fast and reliable document scanner designed for digitizing documents, photos, and important paperwork.',
+    price: 7499,
+    category: 'Scanners',
+  },
+  {
+    id: 12,
+    image: smartRing,
+    heading: 'Smart Ring',
+    desc: 'Sleek and lightweight smart ring with activity tracking, sleep monitoring, and smart health insights.',
+    price: 24999,
+    category: 'Wearable Technology',
+  },
+
+
 ]
 
 export default products

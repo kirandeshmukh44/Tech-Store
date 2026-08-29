@@ -62,7 +62,7 @@ const Navbar = () => {
           <div className="flex items-center gap-2 sm:gap-3">
 
             {/* Search */}
-            <button
+            {/* <button
               className="btn btn-ghost btn-circle hidden sm:flex"
               aria-label="Search"
             >
@@ -80,7 +80,7 @@ const Navbar = () => {
                   d="m21 21-4.35-4.35m2.1-5.4a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"
                 />
               </svg>
-            </button>
+            </button> */}
 
             {/* Cart */}
             <Link

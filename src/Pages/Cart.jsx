@@ -1,13 +1,16 @@
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useCart } from '../Context/CartContext'
 
 const Cart = () => {
+
+    const navigate = useNavigate()
 
     const {
         cartItems,
         removeFromCart,
         increaseQuantity,
         decreaseQuantity,
+        cartCount,
         cartTotal,
     } = useCart()
 
@@ -15,39 +18,61 @@ const Cart = () => {
     // ================= EMPTY CART =================
 
     if (cartItems.length === 0) {
+
         return (
             <div className="min-h-screen bg-base-200">
 
-                <section className="relative overflow-hidden bg-neutral text-neutral-content">
+                <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden px-6">
 
-                    <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-primary/30 blur-3xl" />
-                    <div className="absolute -bottom-40 -left-32 h-96 w-96 rounded-full bg-secondary/20 blur-3xl" />
+                    {/* Background Glow */}
 
-                    <div className="relative mx-auto max-w-7xl px-6 py-20 text-center">
+                    <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
 
-                        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-primary text-4xl shadow-xl">
-                            🛒
+                    <div className="absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-secondary/10 blur-3xl" />
+
+
+                    {/* Empty Cart Card */}
+
+                    <div className="relative w-full max-w-xl">
+
+                        <div className="rounded-[2rem] border border-base-300 bg-base-100 p-8 text-center shadow-xl md:p-12">
+
+                            {/* Icon */}
+
+                            <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full bg-primary/10 text-6xl">
+
+                                🛒
+
+                            </div>
+
+
+                            <p className="mt-8 font-semibold tracking-widest text-primary">
+                                YOUR CART
+                            </p>
+
+
+                            <h1 className="mt-3 text-4xl font-black">
+                                Your Cart is Empty
+                            </h1>
+
+
+                            <p className="mx-auto mt-4 max-w-md leading-relaxed text-base-content/60">
+
+                                Looks like you haven't added anything
+                                to your cart yet. Explore our products
+                                and find something you love.
+
+                            </p>
+
+
+                            <button
+                                onClick={() => navigate('/products')}
+                                className="btn btn-primary btn-lg mt-8 px-8 shadow-lg shadow-primary/20"
+                            >
+                                Explore Products →
+                            </button>
+
                         </div>
-
-                        <p className="mt-6 text-sm font-bold uppercase tracking-[0.3em] text-primary">
-                            TechStore Cart
-                        </p>
-
-                        <h1 className="mt-3 text-4xl font-black md:text-6xl">
-                            Your cart is waiting.
-                        </h1>
-
-                        <p className="mx-auto mt-5 max-w-xl text-neutral-content/60">
-                            You haven't added anything yet. Explore our collection
-                            and find the perfect tech for you.
-                        </p>
-
-                        <Link
-                            to="/products"
-                            className="btn btn-primary mt-8 rounded-xl px-8 shadow-lg shadow-primary/30"
-                        >
-                            Explore Products →
-                        </Link>
 
                     </div>
 
@@ -58,56 +83,45 @@ const Cart = () => {
     }
 
 
+    // ================= CART PAGE =================
+
     return (
         <div className="min-h-screen bg-base-200">
 
-            {/* ================= HERO ================= */}
 
-            <section className="relative overflow-hidden bg-neutral text-neutral-content">
+            {/* ================= HEADER ================= */}
 
-                <div className="absolute -right-40 -top-40 h-[30rem] w-[30rem] rounded-full bg-primary/20 blur-3xl" />
+            <section className="relative overflow-hidden bg-base-100">
 
-                <div className="absolute -bottom-40 -left-40 h-[25rem] w-[25rem] rounded-full bg-secondary/10 blur-3xl" />
+                <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
 
-                <div className="relative mx-auto max-w-7xl px-6 py-14 md:py-20">
+                <div className="relative mx-auto max-w-7xl px-6 py-14 md:py-18">
 
-                    <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+                    <p className="font-semibold tracking-widest text-primary">
+                        TECHSTORE
+                    </p>
+
+                    <div className="mt-3 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
 
                         <div>
 
-                            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm backdrop-blur">
-
-                                <span className="h-2 w-2 rounded-full bg-success" />
-
-                                Your shopping session is active
-
-                            </div>
-
-                            <h1 className="text-4xl font-black tracking-tight md:text-6xl">
-                                Shopping
-                                <span className="text-primary"> Cart.</span>
+                            <h1 className="text-4xl font-black md:text-5xl">
+                                Shopping Cart
                             </h1>
 
-                            <p className="mt-4 max-w-xl text-neutral-content/60">
-                                Everything you've selected, all in one place.
-                                Review your items and get ready to upgrade your tech.
+                            <p className="mt-3 text-base-content/60">
+                                Review your selected products before checkout.
                             </p>
 
                         </div>
 
 
-                        <div className="rounded-2xl border border-white/10 bg-white/5 px-6 py-5 backdrop-blur">
+                        {/* Cart Count */}
 
-                            <p className="text-sm text-neutral-content/50">
-                                Items in cart
-                            </p>
+                        <div className="badge badge-primary badge-lg px-5 py-4 font-semibold">
 
-                            <p className="mt-1 text-3xl font-black">
-                                {cartItems.reduce(
-                                    (total, item) => total + item.quantity,
-                                    0
-                                )}
-                            </p>
+                            {cartCount}
+                            {cartCount === 1 ? ' Item' : ' Items'}
 
                         </div>
 
@@ -118,172 +132,129 @@ const Cart = () => {
             </section>
 
 
-            {/* ================= MAIN ================= */}
+            {/* ================= CART CONTENT ================= */}
 
-            <main className="mx-auto max-w-7xl px-5 py-10 sm:px-6 lg:px-8">
+            <section className="mx-auto max-w-7xl px-5 py-12 sm:px-6 lg:px-8">
 
-                <div className="grid gap-8 lg:grid-cols-[1fr_380px]">
-
-
-                    {/* ================= LEFT ================= */}
-
-                    <div>
-
-                        <div className="mb-5 flex items-center justify-between">
-
-                            <div>
-
-                                <p className="text-sm font-bold uppercase tracking-widest text-primary">
-                                    Your Selection
-                                </p>
-
-                                <h2 className="mt-1 text-2xl font-black">
-                                    Cart Items
-                                </h2>
-
-                            </div>
-
-                            <span className="rounded-full bg-base-100 px-4 py-2 text-sm font-semibold shadow-sm">
-                                {cartItems.length} products
-                            </span>
-
-                        </div>
+                <div className="grid gap-8 lg:grid-cols-3">
 
 
-                        {/* Product List */}
+                    {/* ================= CART ITEMS ================= */}
 
-                        <div className="space-y-4">
+                    <div className="space-y-5 lg:col-span-2">
 
-                            {cartItems.map((item) => (
+                        {cartItems.map((item) => (
 
-                                <div
-                                    key={item.id}
-                                    className="group relative overflow-hidden rounded-3xl border border-base-300 bg-base-100 p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-5"
-                                >
+                            <div
+                                key={item.id}
+                                className="group overflow-hidden rounded-3xl border border-base-300 bg-base-100 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                            >
 
-                                    <div className="flex flex-col gap-5 sm:flex-row">
+                                <div className="flex flex-col gap-5 p-5 sm:flex-row sm:items-center md:p-6">
 
 
-                                        {/* IMAGE */}
+                                    {/* ================= IMAGE ================= */}
 
-                                        <div className="relative flex h-40 w-full shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-base-200 sm:h-32 sm:w-32">
+                                    <div className="flex h-32 w-full shrink-0 items-center justify-center rounded-2xl bg-base-200 p-5 sm:h-36 sm:w-36">
 
-                                            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
+                                        <img
+                                            src={item.image}
+                                            alt={item.heading}
+                                            className="h-full w-full object-contain transition duration-300 group-hover:scale-110"
+                                        />
 
-                                            <img
-                                                src={item.image}
-                                                alt={item.heading}
-                                                className="relative h-full w-full object-contain p-4 transition duration-500 group-hover:scale-110"
-                                            />
+                                    </div>
 
-                                            <span className="absolute left-3 top-3 rounded-full bg-primary px-2.5 py-1 text-[10px] font-bold text-primary-content">
-                                                NEW
-                                            </span>
+
+                                    {/* ================= PRODUCT INFO ================= */}
+
+                                    <div className="flex min-w-0 flex-1 flex-col">
+
+                                        <div className="flex items-start justify-between gap-4">
+
+                                            <div>
+
+                                                <p className="text-xs font-semibold uppercase tracking-widest text-primary">
+                                                    {item.category}
+                                                </p>
+
+                                                <h2 className="mt-1 text-xl font-bold">
+                                                    {item.heading}
+                                                </h2>
+
+                                            </div>
+
+
+                                            {/* Remove */}
+
+                                            <button
+                                                onClick={() => removeFromCart(item.id)}
+                                                className="btn btn-ghost btn-sm btn-circle text-error hover:bg-error/10"
+                                                title="Remove item"
+                                            >
+                                                ✕
+                                            </button>
 
                                         </div>
 
 
-                                        {/* DETAILS */}
+                                        {/* Description */}
 
-                                        <div className="flex min-w-0 flex-1 flex-col">
-
-                                            <div className="flex items-start justify-between gap-4">
-
-                                                <div>
-
-                                                    <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-                                                        {item.category}
-                                                    </p>
-
-                                                    <h3 className="mt-1 text-xl font-black">
-                                                        {item.heading}
-                                                    </h3>
-
-                                                </div>
+                                        <p className="mt-2 line-clamp-2 text-sm text-base-content/50">
+                                            {item.desc}
+                                        </p>
 
 
-                                                {/* REMOVE */}
+                                        {/* Bottom */}
 
-                                                <button
-                                                    onClick={() => removeFromCart(item.id)}
-                                                    className="btn btn-ghost btn-sm rounded-lg text-error hover:bg-error/10"
-                                                    title="Remove item"
-                                                >
-                                                    Remove
-                                                </button>
-
-                                            </div>
+                                        <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
 
-                                            {/* Rating */}
+                                            {/* Quantity */}
 
-                                            <div className="mt-2 flex items-center gap-2">
+                                            <div className="flex items-center">
 
-                                                <span className="text-sm tracking-wide text-warning">
-                                                    ★★★★★
-                                                </span>
+                                                <div className="join border border-base-300 rounded-xl">
 
-                                                <span className="text-xs text-base-content/40">
-                                                    4.8 / 5
-                                                </span>
+                                                    <button
+                                                        onClick={() => decreaseQuantity(item.id)}
+                                                        disabled={item.quantity <= 1}
+                                                        className="btn btn-sm join-item btn-ghost"
+                                                    >
+                                                        −
+                                                    </button>
 
-                                            </div>
-
-
-                                            {/* BOTTOM */}
-
-                                            <div className="mt-auto flex flex-col gap-4 pt-5 sm:flex-row sm:items-end sm:justify-between">
-
-
-                                                {/* Quantity */}
-
-                                                <div>
-
-                                                    <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-base-content/40">
-                                                        Quantity
-                                                    </p>
-
-                                                    <div className="flex w-fit items-center overflow-hidden rounded-xl border border-base-300 bg-base-200">
-
-                                                        <button
-                                                            onClick={() => decreaseQuantity(item.id)}
-                                                            className="flex h-10 w-10 items-center justify-center text-lg font-bold transition hover:bg-base-300"
-                                                        >
-                                                            −
-                                                        </button>
-
-                                                        <span className="flex h-10 min-w-12 items-center justify-center border-x border-base-300 bg-base-100 px-3 font-bold">
-                                                            {item.quantity}
-                                                        </span>
-
-                                                        <button
-                                                            onClick={() => increaseQuantity(item.id)}
-                                                            className="flex h-10 w-10 items-center justify-center text-lg font-bold transition hover:bg-base-300"
-                                                        >
-                                                            +
-                                                        </button>
-
+                                                    <div className="flex h-8 min-w-10 items-center justify-center bg-base-200 px-3 text-sm font-bold">
+                                                        {item.quantity}
                                                     </div>
 
-                                                </div>
-
-
-                                                {/* PRICE */}
-
-                                                <div className="sm:text-right">
-
-                                                    <p className="text-xs text-base-content/40">
-                                                        ₹{Number(item.price).toLocaleString('en-IN')}
-                                                        {' '}each
-                                                    </p>
-
-                                                    <p className="mt-1 text-2xl font-black text-primary">
-                                                        ₹{Number(
-                                                            item.price * item.quantity
-                                                        ).toLocaleString('en-IN')}
-                                                    </p>
+                                                    <button
+                                                        onClick={() => increaseQuantity(item.id)}
+                                                        className="btn btn-sm join-item btn-ghost"
+                                                    >
+                                                        +
+                                                    </button>
 
                                                 </div>
+
+                                            </div>
+
+
+                                            {/* Price */}
+
+                                            <div className="text-left sm:text-right">
+
+                                                <p className="text-xs text-base-content/40">
+                                                    ₹{Number(item.price).toLocaleString('en-IN')}
+                                                    {' '}each
+                                                </p>
+
+                                                <p className="mt-1 text-xl font-black text-primary">
+                                                    ₹{(
+                                                        item.price *
+                                                        item.quantity
+                                                    ).toLocaleString('en-IN')}
+                                                </p>
 
                                             </div>
 
@@ -293,47 +264,41 @@ const Cart = () => {
 
                                 </div>
 
-                            ))}
+                            </div>
 
-                        </div>
+                        ))}
 
 
                         {/* Continue Shopping */}
 
-                        <Link
-                            to="/products"
-                            className="btn btn-outline mt-6 rounded-xl"
+                        <button
+                            onClick={() => navigate('/products')}
+                            className="btn btn-ghost"
                         >
                             ← Continue Shopping
-                        </Link>
+                        </button>
 
                     </div>
 
 
-                    {/* ================= RIGHT SUMMARY ================= */}
+                    {/* ================= ORDER SUMMARY ================= */}
 
-                    <aside>
+                    <div>
 
-                        <div className="sticky top-24 overflow-hidden rounded-3xl border border-base-300 bg-base-100 shadow-xl">
+                        <div className="sticky top-24 overflow-hidden rounded-3xl border border-base-300 bg-base-100 shadow-lg">
 
 
                             {/* Summary Header */}
 
-                            <div className="relative overflow-hidden bg-primary p-6 text-primary-content">
+                            <div className="border-b border-base-300 bg-base-200/50 p-6">
 
-                                <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-white/10 blur-2xl" />
+                                <p className="text-sm font-semibold uppercase tracking-widest text-primary">
+                                    Order Summary
+                                </p>
 
-                                <div className="relative">
-
-                                    <p className="text-sm font-semibold uppercase tracking-widest opacity-70">
-                                        Checkout
-                                    </p>
-
-                                    <h2 className="mt-1 text-2xl font-black">
-                                        Order Summary
-                                    </h2>
-
-                                </div>
+                                <h2 className="mt-1 text-2xl font-black">
+                                    Your Order
+                                </h2>
 
                             </div>
 
@@ -341,72 +306,119 @@ const Cart = () => {
                             <div className="p-6">
 
 
-                                {/* Price */}
+                                {/* Items */}
 
                                 <div className="space-y-4">
 
-                                    <div className="flex justify-between">
+                                    {cartItems.map((item) => (
 
-                                        <span className="text-base-content/60">
-                                            Subtotal
-                                        </span>
+                                        <div
+                                            key={item.id}
+                                            className="flex items-center justify-between gap-4"
+                                        >
 
-                                        <span className="font-bold">
-                                            ₹{Number(cartTotal).toLocaleString('en-IN')}
-                                        </span>
+                                            <div className="flex min-w-0 items-center gap-3">
 
-                                    </div>
+                                                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-base-200 p-2">
+
+                                                    <img
+                                                        src={item.image}
+                                                        alt={item.heading}
+                                                        className="h-full w-full object-contain"
+                                                    />
+
+                                                </div>
+
+                                                <div className="min-w-0">
+
+                                                    <p className="truncate text-sm font-semibold">
+                                                        {item.heading}
+                                                    </p>
+
+                                                    <p className="text-xs text-base-content/50">
+                                                        Qty: {item.quantity}
+                                                    </p>
+
+                                                </div>
+
+                                            </div>
 
 
-                                    <div className="flex justify-between">
+                                            <p className="shrink-0 text-sm font-bold">
+                                                ₹{(
+                                                    item.price *
+                                                    item.quantity
+                                                ).toLocaleString('en-IN')}
+                                            </p>
 
-                                        <span className="text-base-content/60">
-                                            Delivery
-                                        </span>
+                                        </div>
 
-                                        <span className="font-bold text-success">
-                                            FREE
-                                        </span>
-
-                                    </div>
-
-
-                                    <div className="flex justify-between">
-
-                                        <span className="text-base-content/60">
-                                            Discount
-                                        </span>
-
-                                        <span className="font-bold text-success">
-                                            − ₹0
-                                        </span>
-
-                                    </div>
+                                    ))}
 
                                 </div>
 
 
-                                <div className="my-6 border-t border-dashed border-base-300" />
+                                <div className="my-6 border-t border-base-300" />
+
+
+                                {/* Subtotal */}
+
+                                <div className="flex justify-between text-sm text-base-content/60">
+
+                                    <span>
+                                        Subtotal
+                                    </span>
+
+                                    <span className="font-semibold text-base-content">
+                                        ₹{cartTotal.toLocaleString('en-IN')}
+                                    </span>
+
+                                </div>
+
+
+                                {/* Delivery */}
+
+                                <div className="mt-4 flex justify-between text-sm text-base-content/60">
+
+                                    <span>
+                                        Delivery
+                                    </span>
+
+                                    <span className="font-bold text-success">
+                                        FREE
+                                    </span>
+
+                                </div>
+
+
+                                {/* Discount */}
+
+                                <div className="mt-4 flex justify-between text-sm text-base-content/60">
+
+                                    <span>
+                                        Discount
+                                    </span>
+
+                                    <span className="font-bold text-success">
+                                        ₹0
+                                    </span>
+
+                                </div>
+
+
+                                <div className="my-6 border-t border-base-300" />
 
 
                                 {/* Total */}
 
-                                <div className="flex items-end justify-between">
+                                <div className="flex items-center justify-between">
 
-                                    <div>
+                                    <span className="text-lg font-bold">
+                                        Total
+                                    </span>
 
-                                        <p className="text-sm text-base-content/50">
-                                            Total
-                                        </p>
-
-                                        <p className="mt-1 text-3xl font-black">
-                                            ₹{Number(cartTotal).toLocaleString('en-IN')}
-                                        </p>
-
-                                    </div>
-
-                                    <span className="badge badge-success">
-                                        FREE DELIVERY
+                                    <span className="text-3xl font-black text-primary">
+                                        ₹{cartTotal.toLocaleString('en-IN')}
                                     </span>
 
                                 </div>
@@ -414,38 +426,25 @@ const Cart = () => {
 
                                 {/* Checkout */}
 
-                                <button className="btn btn-primary mt-7 h-14 w-full rounded-2xl text-base font-bold shadow-lg shadow-primary/20">
-
-                                    Proceed to Checkout
-                                    <span className="text-lg">→</span>
-
+                                <button
+                                    onClick={() => navigate('/checkout')}
+                                    className="btn btn-primary btn-lg mt-6 w-full shadow-lg shadow-primary/20"
+                                >
+                                    Proceed to Checkout →
                                 </button>
 
 
-                                {/* Security */}
+                                {/* Secure */}
 
-                                <div className="mt-5 rounded-2xl bg-base-200 p-4">
+                                <div className="mt-5 flex items-center justify-center gap-2 text-xs text-base-content/50">
 
-                                    <div className="flex gap-3">
+                                    <span>
+                                        🔒
+                                    </span>
 
-                                        <div className="text-xl">
-                                            🔒
-                                        </div>
-
-                                        <div>
-
-                                            <p className="text-sm font-bold">
-                                                Secure Checkout
-                                            </p>
-
-                                            <p className="mt-1 text-xs leading-relaxed text-base-content/50">
-                                                Your payment and personal information
-                                                are protected.
-                                            </p>
-
-                                        </div>
-
-                                    </div>
+                                    <span>
+                                        Secure & trusted checkout
+                                    </span>
 
                                 </div>
 
@@ -453,80 +452,38 @@ const Cart = () => {
 
                         </div>
 
-                    </aside>
+                    </div>
 
                 </div>
 
-            </main>
+            </section>
 
 
-            {/* ================= TRUST BAR ================= */}
+            {/* ================= BOTTOM CTA ================= */}
 
-            <section className="border-t border-base-300 bg-base-100">
+            <section className="bg-primary text-primary-content">
 
-                <div className="mx-auto grid max-w-7xl gap-6 px-6 py-10 md:grid-cols-3">
+                <div className="mx-auto max-w-4xl px-6 py-14 text-center">
 
-                    <div className="flex items-center gap-4">
-
-                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-xl">
-                            🚚
-                        </div>
-
-                        <div>
-
-                            <p className="font-bold">
-                                Fast Delivery
-                            </p>
-
-                            <p className="text-xs text-base-content/50">
-                                Delivered to your doorstep
-                            </p>
-
-                        </div>
-
+                    <div className="text-4xl">
+                        ⚡
                     </div>
 
+                    <h2 className="mt-4 text-3xl font-black">
+                        Upgrade Your Tech Life
+                    </h2>
 
-                    <div className="flex items-center gap-4">
+                    <p className="mx-auto mt-3 max-w-xl opacity-80">
+                        Discover more products and complete your
+                        perfect technology setup.
+                    </p>
 
-                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-xl">
-                            🛡️
-                        </div>
-
-                        <div>
-
-                            <p className="font-bold">
-                                Secure Shopping
-                            </p>
-
-                            <p className="text-xs text-base-content/50">
-                                Safe & protected payments
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div className="flex items-center gap-4">
-
-                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-xl">
-                            ⭐
-                        </div>
-
-                        <div>
-
-                            <p className="font-bold">
-                                Trusted Quality
-                            </p>
-
-                            <p className="text-xs text-base-content/50">
-                                Quality tech products
-                            </p>
-
-                        </div>
-
-                    </div>
+                    <button
+                        onClick={() => navigate('/products')}
+                        className="btn btn-neutral mt-6"
+                    >
+                        Continue Shopping
+                    </button>
 
                 </div>
 

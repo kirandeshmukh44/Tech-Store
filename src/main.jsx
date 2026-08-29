@@ -3,115 +3,117 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 
 import {
-  BrowserRouter,
-  Routes,
-  Route,
+    BrowserRouter,
+    Routes,
+    Route,
 } from 'react-router-dom'
 
 import Home from './Pages/Home.jsx'
 import About from './Pages/About.jsx'
 import Contact from './Pages/Contact.jsx'
 import Products from './Pages/Products.jsx'
-import Cart from './Pages/Cart.jsx'
-
 import Layout from './Layout.jsx'
+
 import Register from './Pages/Register.jsx'
 import Login from './Pages/Login.jsx'
 import Welcome from './Pages/Welcome.jsx'
 
-import { CartProvider } from './Context/CartContext'
+import Cart from './Pages/Cart.jsx'
+import Checkout from './Pages/Checkout.jsx'
+import OrderSuccess from './Pages/OrderSuccess.jsx'
 
+import { CartProvider } from './Context/CartContext'
 
 const AppRouter = () => {
 
-  return (
+    return (
+        <BrowserRouter>
 
-    <BrowserRouter>
+            <Routes>
 
-      <Routes>
+                {/* ================= WELCOME ================= */}
 
-        {/* ================= WELCOME PAGE ================= */}
-
-        <Route
-          path="/"
-          element={<Welcome />}
-        />
-
-
-        {/* ================= AUTHENTICATION ================= */}
-
-        <Route
-          path="/login"
-          element={<Login />}
-        />
-
-        <Route
-          path="/register"
-          element={<Register />}
-        />
+                <Route
+                    path="/"
+                    element={<Welcome />}
+                />
 
 
-        {/* ================= MAIN WEBSITE ================= */}
+                {/* ================= AUTHENTICATION ================= */}
 
-        <Route element={<Layout />}>
+                <Route
+                    path="/login"
+                    element={<Login />}
+                />
 
-          {/* Home */}
-
-          <Route
-            path="/home"
-            element={<Home />}
-          />
-
-
-          {/* Products */}
-
-          <Route
-            path="/products"
-            element={<Products />}
-          />
+                <Route
+                    path="/register"
+                    element={<Register />}
+                />
 
 
-          {/* About */}
+                {/* ================= MAIN WEBSITE ================= */}
 
-          <Route
-            path="/about"
-            element={<About />}
-          />
+                <Route
+                    path="/"
+                    element={<Layout />}
+                >
+
+                    <Route
+                        path="home"
+                        element={<Home />}
+                    />
+
+                    <Route
+                        path="products"
+                        element={<Products />}
+                    />
+
+                    <Route
+                        path="about"
+                        element={<About />}
+                    />
+
+                    <Route
+                        path="contact"
+                        element={<Contact />}
+                    />
+
+                    <Route
+                        path="cart"
+                        element={<Cart />}
+                    />
+
+                    <Route
+                        path="checkout"
+                        element={<Checkout />}
+                    />
+
+                </Route>
 
 
-          {/* Contact */}
+                {/* ================= ORDER SUCCESS ================= */}
 
-          <Route
-            path="/contact"
-            element={<Contact />}
-          />
+                <Route
+                    path="/order-success"
+                    element={<OrderSuccess />}
+                />
 
+            </Routes>
 
-          {/* Cart */}
-
-          <Route
-            path="/cart"
-            element={<Cart />}
-          />
-
-        </Route>
-
-      </Routes>
-
-    </BrowserRouter>
-
-  )
+        </BrowserRouter>
+    )
 }
 
 
 createRoot(document.getElementById('root')).render(
 
-  <StrictMode>
+    <StrictMode>
 
-    <CartProvider>
-      <AppRouter />
-    </CartProvider>
+        <CartProvider>
+            <AppRouter />
+        </CartProvider>
 
-  </StrictMode>
+    </StrictMode>
 
 )

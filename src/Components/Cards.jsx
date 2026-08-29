@@ -3,32 +3,31 @@ import { useCart } from '../Context/CartContext'
 
 const Cards = ({ product }) => {
 
-  const { addToCart } = useCart()
+  const { addToCart, cartItems } = useCart()
+
+  const isInCart = cartItems.some(
+    (item) => item.id === product.id
+  )
 
   return (
-    <div className="group flex h-full w-full flex-col overflow-hidden rounded-2xl border border-base-300 bg-base-100 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-primary/30 hover:shadow-xl">
+    <div className="group flex h-full w-full flex-col overflow-hidden rounded-3xl border border-base-300 bg-base-100 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-primary/40 hover:shadow-2xl">
 
       {/* ================= IMAGE ================= */}
 
-      <figure className="relative h-56 overflow-hidden bg-base-200 p-6">
+      <figure className="relative h-60 overflow-hidden bg-base-200 p-6">
 
         {/* New Badge */}
-
         <div className="absolute left-4 top-4 z-10">
-
-          <span className="badge badge-primary font-semibold">
+          <span className="badge badge-primary font-semibold shadow-sm">
             New
           </span>
-
         </div>
 
-
-        {/* Image */}
-
+        {/* Product Image */}
         <img
           src={product.image}
           alt={product.heading}
-          className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
+          className="h-full w-full object-contain transition duration-500 group-hover:scale-110"
         />
 
       </figure>
@@ -38,9 +37,16 @@ const Cards = ({ product }) => {
 
       <div className="flex flex-1 flex-col p-5">
 
+        {/* Category */}
+
+        <p className="text-xs font-bold uppercase tracking-widest text-primary">
+          {product.category}
+        </p>
+
+
         {/* Product Name */}
 
-        <h2 className="text-xl font-bold tracking-tight">
+        <h2 className="mt-2 text-xl font-black tracking-tight">
           {product.heading}
         </h2>
 
@@ -49,7 +55,7 @@ const Cards = ({ product }) => {
 
         <div className="mt-2 flex items-center gap-2">
 
-          <div className="flex text-sm text-orange-400">
+          <div className="text-sm text-orange-400">
             ★★★★★
           </div>
 
@@ -84,13 +90,27 @@ const Cards = ({ product }) => {
           </div>
 
 
-          {/* Add To Cart */}
+          {/* ================= ADD TO CART ================= */}
 
           <button
             onClick={() => addToCart(product)}
-            className="btn btn-primary w-full rounded-xl"
+            className={`btn w-full rounded-xl transition-all duration-300 ${
+              isInCart
+                ? 'btn-success'
+                : 'btn-primary shadow-lg shadow-primary/20'
+            }`}
           >
-            🛒 Add to Cart
+
+            {isInCart ? (
+              <>
+                ✓ Added to Cart
+              </>
+            ) : (
+              <>
+                🛒 Add to Cart
+              </>
+            )}
+
           </button>
 
         </div>

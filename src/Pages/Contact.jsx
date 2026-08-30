@@ -1,4 +1,13 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  CheckCircle2,
+  HelpCircle,
+  Sparkles,
+} from 'lucide-react'
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,239 +17,241 @@ const Contact = () => {
     message: '',
   })
 
+  const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+
   const handleChange = (e) => {
     const { name, value } = e.target
-
-    setFormData({
-      ...formData,
-      [name]: value,
-    })
+    setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setLoading(true)
 
-    alert('Thank you! Your message has been submitted.')
-
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: '',
-    })
+    setTimeout(() => {
+      setLoading(false)
+      setSubmitted(true)
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+      })
+      setTimeout(() => setSubmitted(false), 6000)
+    }, 1000)
   }
 
   const contactInfo = [
     {
-      icon: '📧',
-      title: 'Email',
+      icon: <Mail className="h-6 w-6 text-primary" />,
+      title: 'Customer Email Support',
       value: 'support@techstore.com',
-      description: 'Send us an email anytime',
+      desc: 'Response guaranteed within 2-4 business hours',
     },
     {
-      icon: '📞',
-      title: 'Phone',
+      icon: <Phone className="h-6 w-6 text-cyan-500" />,
+      title: 'Toll-Free Phone Helpline',
       value: '+91 98765 43210',
-      description: 'Mon - Sat, 9 AM - 6 PM',
+      desc: 'Monday to Saturday, 9:00 AM - 7:00 PM IST',
     },
     {
-      icon: '📍',
-      title: 'Location',
-      value: 'Pune, Maharashtra',
-      description: 'India',
+      icon: <MapPin className="h-6 w-6 text-emerald-500" />,
+      title: 'Headquarters & Logistics Hub',
+      value: 'Pune Innovation Park',
+      desc: 'Maharashtra 411001, India',
+    },
+  ]
+
+  const faqs = [
+    {
+      q: 'How long does express shipping take?',
+      a: 'All in-stock orders are processed within 24 hours and delivered in 2 to 3 business days nationwide.',
+    },
+    {
+      q: 'Are all products covered by manufacturer warranty?',
+      a: 'Yes, 100% of our products come with official brand warranty, original packaging, and verified tax invoice.',
+    },
+    {
+      q: 'What is the return or replacement policy?',
+      a: 'We offer a hassle-free 7-day replacement guarantee if your product arrives damaged or with any technical defect.',
     },
   ]
 
   return (
-    <div className="min-h-screen bg-base-200">
+    <div className="min-h-screen bg-base-200 transition-colors duration-300">
+      {/* Hero */}
+      <section className="bg-base-100 py-16 sm:py-20 border-b border-base-300">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-xs font-bold text-primary mb-3">
+            <Sparkles className="h-3.5 w-3.5" />
+            <span>WE ARE HERE FOR YOU</span>
+          </div>
 
-      {/* Hero Section */}
-      <section className="bg-base-100">
-        <div className="mx-auto max-w-7xl px-6 py-20 text-center">
-
-          <p className="font-semibold tracking-widest text-primary">
-            GET IN TOUCH
-          </p>
-
-          <h1 className="mt-3 text-4xl font-bold md:text-5xl">
-            Contact <span className="text-primary">Us</span>
+          <h1 className="text-3xl sm:text-5xl font-black tracking-tight">
+            Contact <span className="text-gradient">TechStore</span>
           </h1>
 
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-base-content/60">
-            Have a question or need help? Our team is here to
-            help you with anything you need.
+          <p className="mx-auto mt-3 max-w-xl text-sm sm:text-base text-base-content/70">
+            Have questions about product specifications, order status, or warranty? Our support engineering team is ready to help.
           </p>
-
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="mx-auto max-w-7xl px-6 py-20">
-
+      {/* Main Grid */}
+      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2">
+          {/* Left Side: Contact Cards */}
+          <div className="space-y-6">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest text-primary">
+                Direct Channels
+              </p>
+              <h2 className="mt-1 text-2xl sm:text-3xl font-black">
+                Get in Touch With Our Team
+              </h2>
+            </div>
 
-          {/* Left Side */}
-          <div>
-
-            <p className="font-semibold tracking-widest text-primary">
-              CONTACT INFORMATION
-            </p>
-
-            <h2 className="mt-3 text-3xl font-bold md:text-4xl">
-              Let's Talk
-            </h2>
-
-            <p className="mt-5 max-w-lg leading-relaxed text-base-content/60">
-              Whether you have a question about our products,
-              your order, delivery or anything else, our team is
-              always ready to help.
-            </p>
-
-            {/* Contact Cards */}
-            <div className="mt-8 space-y-4">
-
-              {contactInfo.map((item) => (
+            <div className="space-y-4">
+              {contactInfo.map((info) => (
                 <div
-                  key={item.title}
-                  className="group rounded-2xl border border-base-300 bg-base-100 p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  key={info.title}
+                  className="flex items-start gap-4 rounded-3xl border border-base-300 bg-base-100 p-6 shadow-sm transition hover:shadow-md"
                 >
-                  <div className="flex items-center gap-4">
-
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-2xl transition group-hover:scale-110">
-                      {item.icon}
-                    </div>
-
-                    <div>
-                      <h3 className="font-bold">
-                        {item.title}
-                      </h3>
-
-                      <p className="mt-1 font-medium text-primary">
-                        {item.value}
-                      </p>
-
-                      <p className="mt-1 text-sm text-base-content/50">
-                        {item.description}
-                      </p>
-                    </div>
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-base-200">
+                    {info.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-base-content">
+                      {info.title}
+                    </h3>
+                    <p className="mt-1 text-sm font-semibold text-primary">
+                      {info.value}
+                    </p>
+                    <p className="mt-0.5 text-xs text-base-content/50">
+                      {info.desc}
+                    </p>
                   </div>
                 </div>
               ))}
             </div>
+
+            {/* Quick FAQs */}
+            <div className="rounded-3xl border border-base-300 bg-base-100 p-6 shadow-sm space-y-4">
+              <h3 className="text-base font-bold flex items-center gap-2">
+                <HelpCircle className="h-5 w-5 text-primary" />
+                <span>Frequently Asked Questions</span>
+              </h3>
+
+              <div className="space-y-3">
+                {faqs.map((faq, i) => (
+                  <div
+                    key={i}
+                    className="collapse collapse-arrow rounded-2xl bg-base-200/50 border border-base-300/60"
+                  >
+                    <input type="checkbox" />
+                    <div className="collapse-title text-xs sm:text-sm font-bold">
+                      {faq.q}
+                    </div>
+                    <div className="collapse-content text-xs text-base-content/70 leading-relaxed">
+                      {faq.a}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* Right Side - Form */}
-          <div className="rounded-2xl border border-base-300 bg-base-100 shadow-xl">
-
-            <form
-              onSubmit={handleSubmit}
-              className="p-6 md:p-8"
-            >
-
-              <h2 className="text-2xl font-bold">
-                Send us a Message
-              </h2>
-
-              <p className="mt-2 text-sm text-base-content/50">
-                Fill out the form and we'll get back to you soon.
+          {/* Right Side: Message Form */}
+          <div>
+            <div className="rounded-3xl border border-base-300 bg-base-100 p-6 sm:p-10 shadow-xl">
+              <h3 className="text-2xl font-black">Send us a Message</h3>
+              <p className="mt-1 text-xs text-base-content/60">
+                Fill out the details below and we'll reply to your email promptly.
               </p>
 
-              {/* Name */}
-              <div className="mt-6">
-                <label className="mb-2 block text-sm font-semibold">
-                  Your Name
-                </label>
+              {submitted && (
+                <div className="mt-6 flex items-center gap-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 p-4 text-emerald-500 text-sm font-semibold">
+                  <CheckCircle2 className="h-5 w-5 shrink-0" />
+                  <span>
+                    Thank you! Your message has been sent successfully. Our team will contact you shortly.
+                  </span>
+                </div>
+              )}
 
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Enter your name"
-                  className="input input-bordered w-full"
-                  required
-                />
-              </div>
+              <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+                <div>
+                  <label className="label text-xs font-bold">Your Name *</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Enter your full name"
+                    required
+                    className="input input-bordered w-full rounded-2xl bg-base-100 text-sm focus:border-primary"
+                  />
+                </div>
 
-              {/* Email */}
-              <div className="mt-4">
-                <label className="mb-2 block text-sm font-semibold">
-                  Email Address
-                </label>
+                <div>
+                  <label className="label text-xs font-bold">Email Address *</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="you@example.com"
+                    required
+                    className="input input-bordered w-full rounded-2xl bg-base-100 text-sm focus:border-primary"
+                  />
+                </div>
 
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="Enter your email"
-                  className="input input-bordered w-full"
-                  required
-                />
-              </div>
+                <div>
+                  <label className="label text-xs font-bold">Subject *</label>
+                  <input
+                    type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="e.g. Inquiry about Laptop Warranty"
+                    required
+                    className="input input-bordered w-full rounded-2xl bg-base-100 text-sm focus:border-primary"
+                  />
+                </div>
 
-              {/* Subject */}
-              <div className="mt-4">
-                <label className="mb-2 block text-sm font-semibold">
-                  Subject
-                </label>
+                <div>
+                  <label className="label text-xs font-bold">Message *</label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Describe how we can assist you..."
+                    required
+                    rows="4"
+                    className="textarea textarea-bordered w-full rounded-2xl bg-base-100 text-sm focus:border-primary"
+                  />
+                </div>
 
-                <input
-                  type="text"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  placeholder="What is this about?"
-                  className="input input-bordered w-full"
-                  required
-                />
-              </div>
-
-              {/* Message */}
-              <div className="mt-4">
-                <label className="mb-2 block text-sm font-semibold">
-                  Message
-                </label>
-
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Write your message..."
-                  className="textarea textarea-bordered min-h-32 w-full"
-                  required
-                />
-              </div>
-
-              {/* Submit */}
-              <button
-                type="submit"
-                className="btn btn-primary mt-6 w-full"
-              >
-                Send Message →
-              </button>
-            </form>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="btn btn-primary btn-lg w-full rounded-2xl font-bold shadow-xl shadow-primary/25 hover:scale-[1.01] transition mt-6 flex items-center justify-center gap-2"
+                >
+                  {loading ? (
+                    <>
+                      <span className="loading loading-spinner" />
+                      <span>Sending Message...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Send Message</span>
+                      <Send className="h-4 w-4" />
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Bottom CTA */}
-      <section className="bg-primary text-primary-content">
-
-        <div className="mx-auto max-w-4xl px-6 py-16 text-center">
-
-          <div className="text-5xl">
-            💬
-          </div>
-
-          <h2 className="mt-4 text-3xl font-bold">
-            We're Here to Help
-          </h2>
-
-          <p className="mx-auto mt-3 max-w-xl opacity-80">
-            Your questions and feedback matter to us.
-            Don't hesitate to reach out.
-          </p>
         </div>
       </section>
     </div>

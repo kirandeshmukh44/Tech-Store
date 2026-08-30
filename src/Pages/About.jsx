@@ -1,225 +1,169 @@
+import React from 'react'
 import { Link } from 'react-router-dom'
+import {
+  Zap,
+  Target,
+  Lightbulb,
+  HeartHandshake,
+  Sparkles,
+  ArrowRight,
+} from 'lucide-react'
 
 const About = () => {
   const values = [
     {
-      icon: '🎯',
+      icon: <Target className="h-8 w-8 text-primary" />,
       title: 'Our Mission',
       description:
-        'Our mission is to make modern technology simple, accessible and convenient for everyone.',
+        'To democratize access to world-class personal computing, wearable intelligence, and digital lifestyle hardware with transparent pricing.',
     },
     {
-      icon: '💡',
+      icon: <Lightbulb className="h-8 w-8 text-cyan-500" />,
       title: 'Our Vision',
       description:
-        'We want to create a trusted online destination for technology products and accessories.',
+        'To become the most reliable, customer-centric technology platform that bridges the gap between next-generation innovations and consumers.',
     },
     {
-      icon: '🤝',
+      icon: <HeartHandshake className="h-8 w-8 text-emerald-500" />,
       title: 'Our Promise',
       description:
-        'We focus on quality products, simple shopping and a great customer experience.',
+        'Strict 100% authenticity standards, rigorous product testing, zero counterfeit tolerance, and 24/7 dedicated customer engineering support.',
     },
   ]
 
   const stats = [
-    {
-      value: '500+',
-      title: 'Products',
-      description: 'Technology products',
-    },
-    {
-      value: '50K+',
-      title: 'Customers',
-      description: 'Happy customers',
-    },
-    {
-      value: '4.8 ⭐',
-      title: 'Rating',
-      description: 'Customer satisfaction',
-    },
-    {
-      value: '24/7',
-      title: 'Support',
-      description: 'Always here to help',
-    },
+    { value: '500+', title: 'Curated Devices', desc: 'Laptops, phones & wearables' },
+    { value: '15K+', title: 'Active Enthusiasts', desc: 'Satisfied tech customers' },
+    { value: '99.8%', title: 'On-Time Dispatch', desc: 'Priority express delivery' },
+    { value: '24/7', title: 'Specialist Support', desc: 'Always ready to help' },
   ]
 
   return (
-    <div className="min-h-screen bg-base-200">
-
+    <div className="min-h-screen bg-base-200 transition-colors duration-300">
       {/* Hero */}
-      <section className="bg-base-100">
-        <div className="mx-auto max-w-7xl px-6 py-20 text-center">
-          <p className="font-semibold tracking-widest text-primary">
-            ABOUT US
-          </p>
+      <section className="relative overflow-hidden bg-base-100 py-16 sm:py-24 border-b border-base-300">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8 text-center">
+          <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-xs font-bold text-primary mb-3">
+            <Sparkles className="h-3.5 w-3.5" />
+            <span>DISCOVER OUR STORY</span>
+          </div>
 
-          <h1 className="mt-3 text-4xl font-bold md:text-5xl">
-            About <span className="text-primary">TechStore</span>
+          <h1 className="text-3xl sm:text-5xl font-black tracking-tight">
+            About <span className="text-gradient">TechStore</span>
           </h1>
 
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-base-content/60">
-            Your destination for modern technology and digital products.
+          <p className="mx-auto mt-4 max-w-2xl text-sm sm:text-base text-base-content/70 leading-relaxed">
+            Founded with a passion for cutting-edge engineering, TechStore is built for technology lovers who demand uncompromising quality, authentic hardware, and effortless shopping.
           </p>
         </div>
       </section>
 
-      {/* About Content */}
-      <section className="mx-auto max-w-7xl px-6 py-20">
-        <div className="grid items-center gap-12 md:grid-cols-2">
-
+      {/* Main Content */}
+      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:px-8">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
           {/* Image */}
-          <div>
-            <img
-              src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900"
-              alt="Technology workspace"
-              className="w-full rounded-3xl shadow-xl"
-            />
+          <div className="relative">
+            <div className="overflow-hidden rounded-[2.5rem] border border-base-300 bg-base-100 p-3 shadow-xl">
+              <img
+                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900"
+                alt="TechStore Innovation Center"
+                className="h-[360px] sm:h-[420px] w-full rounded-[2rem] object-cover"
+              />
+            </div>
           </div>
 
           {/* Text */}
-          <div>
-            <p className="font-semibold tracking-widest text-primary">
-              WHO WE ARE
-            </p>
-
-            <h2 className="mt-3 text-3xl font-bold md:text-4xl">
-              Technology Made Simple
+          <div className="space-y-5">
+            <div className="badge badge-primary font-bold">WHO WE ARE</div>
+            <h2 className="text-3xl sm:text-4xl font-black text-base-content leading-tight">
+              Technology Made Simple, Powerful & Accessible.
             </h2>
-
-            <p className="mt-6 leading-relaxed text-base-content/70">
-              TechStore is a modern e-commerce platform created for
-              technology lovers. We provide smartphones, laptops,
-              headphones, gaming accessories and more.
+            <p className="text-sm sm:text-base leading-relaxed text-base-content/70">
+              TechStore was founded on a simple principle: buying high-performance technology shouldn't be complicated or full of doubts.
             </p>
-
-            <p className="mt-4 leading-relaxed text-base-content/70">
-              Our goal is to make technology shopping simple,
-              convenient and enjoyable for everyone.
+            <p className="text-sm leading-relaxed text-base-content/70">
+              Every device in our catalog is hand-vetted for verified serial authenticity, genuine manufacturer warranties, and uncompromised build quality.
             </p>
-
-            <Link
-              to="/products"
-              className="btn btn-primary mt-7"
-            >
-              Explore Products →
-            </Link>
+            <div className="pt-2">
+              <Link
+                to="/products"
+                className="btn btn-primary rounded-xl font-bold px-6 shadow-lg shadow-primary/20 flex items-center gap-2"
+              >
+                <span>Explore Our Catalog</span>
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
           </div>
-
         </div>
       </section>
 
       {/* Values */}
-      <section className="bg-base-100">
-        <div className="mx-auto max-w-7xl px-6 py-20">
-
-          <div className="mb-12 text-center">
-            <p className="font-semibold tracking-widest text-primary">
-              OUR VALUES
+      <section className="bg-base-100 py-16 border-t border-b border-base-300">
+        <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
+          <div className="text-center max-w-xl mx-auto mb-12">
+            <p className="text-xs font-bold uppercase tracking-widest text-primary">
+              Core Principles
             </p>
-
-            <h2 className="mt-3 text-3xl font-bold md:text-4xl">
-              What We Believe
-            </h2>
-
-            <p className="mx-auto mt-3 max-w-xl text-base-content/60">
-              The values behind TechStore.
-            </p>
+            <h2 className="mt-1 text-3xl font-black">What Drives Us</h2>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
-
-            {values.map((value) => (
+            {values.map((v) => (
               <div
-                key={value.title}
-                className="card border border-base-300 bg-base-200 shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl"
+                key={v.title}
+                className="rounded-3xl border border-base-300 bg-base-200/50 p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
               >
-                <div className="card-body items-center text-center">
-
-                  <div className="text-5xl">
-                    {value.icon}
-                  </div>
-
-                  <h3 className="mt-2 text-xl font-bold">
-                    {value.title}
-                  </h3>
-
-                  <p className="text-base-content/60">
-                    {value.description}
-                  </p>
-
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-base-100 shadow-sm mb-6">
+                  {v.icon}
                 </div>
+                <h3 className="text-xl font-bold">{v.title}</h3>
+                <p className="mt-3 text-xs sm:text-sm leading-relaxed text-base-content/60">
+                  {v.description}
+                </p>
               </div>
             ))}
-
           </div>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="mx-auto max-w-7xl px-6 py-20">
-
-        <div className="mb-10 text-center">
-          <p className="font-semibold tracking-widest text-primary">
-            TECHSTORE
-          </p>
-
-          <h2 className="mt-3 text-3xl font-bold md:text-4xl">
-            Our Numbers
-          </h2>
-        </div>
-
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-
-          {stats.map((stat) => (
+      {/* Metrics */}
+      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-6 lg:px-8">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map((st) => (
             <div
-              key={stat.title}
-              className="rounded-2xl border border-base-300 bg-base-100 p-8 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg"
+              key={st.title}
+              className="rounded-3xl border border-base-300 bg-base-100 p-8 text-center shadow-sm"
             >
-              <p className="text-3xl font-bold text-primary">
-                {stat.value}
+              <p className="text-3xl sm:text-4xl font-black text-primary">
+                {st.value}
               </p>
-
-              <h3 className="mt-2 font-bold">
-                {stat.title}
-              </h3>
-
-              <p className="mt-1 text-sm text-base-content/50">
-                {stat.description}
-              </p>
+              <h4 className="mt-2 font-bold text-base-content">{st.title}</h4>
+              <p className="mt-1 text-xs text-base-content/50">{st.desc}</p>
             </div>
           ))}
-
         </div>
       </section>
 
       {/* CTA */}
-      <section className="bg-primary text-primary-content">
-        <div className="mx-auto max-w-4xl px-6 py-20 text-center">
-
-          <div className="text-5xl">
-            🚀
+      <section className="mx-auto max-w-5xl px-5 pb-16 sm:px-6">
+        <div className="rounded-[2.5rem] bg-gradient-to-r from-primary via-indigo-600 to-cyan-600 p-8 sm:p-12 text-center text-white shadow-2xl">
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-md mx-auto mb-4">
+            <Zap className="h-7 w-7 fill-current" />
           </div>
-
-          <h2 className="mt-5 text-3xl font-bold md:text-4xl">
-            Ready to Upgrade Your Tech?
+          <h2 className="text-2xl sm:text-4xl font-black">
+            Ready to Build Your Dream Setup?
           </h2>
-
-          <p className="mx-auto mt-4 max-w-xl opacity-80">
-            Discover amazing technology products at TechStore.
+          <p className="mx-auto mt-3 max-w-md text-sm text-white/80">
+            Enjoy premium discounts, authentic warranties, and 24/7 support with TechStore today.
           </p>
-
           <Link
             to="/products"
-            className="btn btn-neutral mt-8"
+            className="btn btn-neutral btn-lg rounded-2xl px-8 font-bold mt-6 shadow-xl"
           >
             Shop Now →
           </Link>
-
         </div>
       </section>
-
     </div>
   )
 }

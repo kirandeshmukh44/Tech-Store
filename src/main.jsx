@@ -21,26 +21,25 @@ import Welcome from './Pages/Welcome.jsx'
 import Cart from './Pages/Cart.jsx'
 import Checkout from './Pages/Checkout.jsx'
 import OrderSuccess from './Pages/OrderSuccess.jsx'
+import MyOrders from './Pages/MyOrders.jsx'
 
+import { ThemeProvider } from './Context/ThemeContext'
+import { AuthProvider } from './Context/AuthContext'
+import { WishlistProvider } from './Context/WishlistContext'
 import { CartProvider } from './Context/CartContext'
+import Toast from './Components/Toast'
 
 const AppRouter = () => {
-
     return (
         <BrowserRouter>
-
             <Routes>
-
                 {/* ================= WELCOME ================= */}
-
                 <Route
                     path="/"
                     element={<Welcome />}
                 />
 
-
                 {/* ================= AUTHENTICATION ================= */}
-
                 <Route
                     path="/login"
                     element={<Login />}
@@ -51,14 +50,11 @@ const AppRouter = () => {
                     element={<Register />}
                 />
 
-
-                {/* ================= MAIN WEBSITE ================= */}
-
+                {/* ================= MAIN WEBSITE WITH LAYOUT ================= */}
                 <Route
                     path="/"
                     element={<Layout />}
                 >
-
                     <Route
                         path="home"
                         element={<Home />}
@@ -89,31 +85,33 @@ const AppRouter = () => {
                         element={<Checkout />}
                     />
 
+                    <Route
+                        path="my-orders"
+                        element={<MyOrders />}
+                    />
                 </Route>
 
-
                 {/* ================= ORDER SUCCESS ================= */}
-
                 <Route
                     path="/order-success"
                     element={<OrderSuccess />}
                 />
-
             </Routes>
-
         </BrowserRouter>
     )
 }
 
-
 createRoot(document.getElementById('root')).render(
-
     <StrictMode>
-
-        <CartProvider>
-            <AppRouter />
-        </CartProvider>
-
+        <ThemeProvider>
+            <AuthProvider>
+                <WishlistProvider>
+                    <CartProvider>
+                        <AppRouter />
+                        <Toast />
+                    </CartProvider>
+                </WishlistProvider>
+            </AuthProvider>
+        </ThemeProvider>
     </StrictMode>
-
 )

@@ -28,13 +28,14 @@ const Checkout = () => {
 
   const [paymentMethod, setPaymentMethod] = useState('cod')
   const [loading, setLoading] = useState(false)
+  const [orderPlaced, setOrderPlaced] = useState(false)
 
-  // Redirect to cart if empty
+  // Redirect to cart only if cart is empty and order is NOT being placed
   useEffect(() => {
-    if (cartItems.length === 0 && !loading) {
+    if (cartItems.length === 0 && !loading && !orderPlaced) {
       navigate('/cart')
     }
-  }, [cartItems, navigate, loading])
+  }, [cartItems.length, loading, orderPlaced, navigate])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -44,6 +45,7 @@ const Checkout = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     setLoading(true)
+    setOrderPlaced(true)
 
     const orderPayload = {
       items: [...cartItems],
@@ -56,23 +58,28 @@ const Checkout = () => {
         paymentMethod === 'cod'
           ? 'Cash on Delivery'
           : paymentMethod === 'upi'
-          ? 'Instant UPI'
+          ? 'Instant UPI / QR'
           : 'Credit / Debit Card',
     }
 
-    setTimeout(() => {
+    try {
       const createdOrder = addOrder(orderPayload)
-      // Save last placed order in session for receipt display
-      try {
-        sessionStorage.setItem('last_order', JSON.stringify(createdOrder))
-      } catch (err) {
-        console.error(err)
-      }
+      // Save order in sessionStorage and localStorage
+      sessionStorage.setItem('last_order', JSON.stringify(createdOrder))
+      localStorage.setItem('techstore_last_order', JSON.stringify(createdOrder))
 
+      // Clear cart
       clearCart()
-      setLoading(false)
+
+      // Navigate immediately with order state
+      navigate('/order-success', { state: { order: createdOrder }, replace: true })
+    } catch (err) {
+      console.error('Order creation error:', err)
+      clearCart()
       navigate('/order-success')
-    }, 1500)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -283,7 +290,7 @@ const Checkout = () => {
                 {loading ? (
                   <>
                     <span className="loading loading-spinner" />
-                    <span>Securing Order...</span>
+                    <span>Processing Secure Order...</span>
                   </>
                 ) : (
                   <>

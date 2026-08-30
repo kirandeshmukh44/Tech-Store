@@ -1,420 +1,227 @@
 /* =========================================
-   TECHSTORE ORDER SUCCESS
+   CLEAN & ATTRACTIVE ORDER SUCCESS EXPERIENCE
 ========================================= */
 
-.order-success-page {
-    min-height: 100vh;
-    overflow: hidden;
-    position: relative;
-    background:
-        radial-gradient(circle at 50% 20%, rgba(59, 130, 246, .15), transparent 35%),
-        #0b1020;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif;
+.order-success-clean-page {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.2), transparent 40%),
+    radial-gradient(circle at 90% 90%, rgba(6, 182, 212, 0.12), transparent 40%),
+    #070a14;
+  color: #ffffff;
+  padding: 40px 16px 80px;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.success-glow {
-    position: absolute;
-    width: 450px;
-    height: 450px;
-    border-radius: 50%;
-    filter: blur(100px);
-    pointer-events: none;
+/* Ambient glow */
+.bg-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(140px);
+  pointer-events: none;
 }
 
-.glow-one { background: rgba(37, 99, 235, .18); top: -200px; left: -150px; }
-.glow-two { background: rgba(16, 185, 129, .12); right: -180px; bottom: -200px; }
-
-/* =========================================
-   STATUS STEPPER
-========================================= */
-
-.order-status {
-    position: relative;
-    z-index: 10;
-    width: min(850px, 95%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 35px;
+.bg-glow-primary {
+  background: rgba(99, 102, 241, 0.22);
+  top: -150px;
+  left: -150px;
 }
 
-.status-step {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 7px;
-    color: rgba(255, 255, 255, .35);
-    min-width: 80px;
-    transition: color .5s ease;
+.bg-glow-cyan {
+  background: rgba(6, 182, 212, 0.18);
+  bottom: -150px;
+  right: -150px;
 }
 
-.status-step span {
-    width: 38px;
-    height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, .06);
-    border: 1px solid rgba(255, 255, 255, .1);
-    font-size: 15px;
-    transition: .5s ease;
-}
-
-.status-step p { margin: 0; font-size: 11px; white-space: nowrap; }
-.status-step.active { color: white; }
-.status-step.active span {
-    background: #2563eb;
-    border-color: #60a5fa;
-    box-shadow: 0 0 25px rgba(37, 99, 235, .6);
-}
-
-.status-line {
-    height: 2px;
-    width: 80px;
-    background: rgba(255, 255, 255, .1);
-    transition: background .5s ease, box-shadow .5s ease;
-}
-
-.status-line.filled {
-    background: #2563eb;
-    box-shadow: 0 0 12px rgba(37, 99, 235, .6);
+.order-success-content-wrapper {
+  position: relative;
+  z-index: 10;
+  max-width: 1080px;
+  margin: 0 auto;
 }
 
 /* =========================================
-   DELIVERY SCENE
+   HERO CELEBRATION
 ========================================= */
 
-.delivery-scene {
-    position: relative;
-    width: min(1100px, 100%);
-    height: 420px;
-    border-radius: 35px;
-    overflow: hidden;
-    background: #0f1830;
-    border: 1px solid rgba(255, 255, 255, .08);
-    box-shadow: 0 30px 80px rgba(0, 0, 0, .45), inset 0 1px rgba(255, 255, 255, .06);
-    transition: opacity .6s ease, transform .6s ease;
+.celebration-hero {
+  animation: heroSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.stage-success .delivery-scene {
-    opacity: 0;
-    transform: scale(.97);
-    pointer-events: none;
+@keyframes heroSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.scene-svg { width: 100%; height: 100%; display: block; }
-
-/* -------- ambience -------- */
-
-.hill { fill: rgba(255, 255, 255, .035); }
-.hill-b { fill: rgba(255, 255, 255, .05); }
-
-.cloud { fill: rgba(255, 255, 255, .08); }
-.cloud-a { animation: driftA 16s ease-in-out infinite; }
-.cloud-b { animation: driftB 21s ease-in-out infinite; }
-.cloud-c { animation: driftC 18s ease-in-out infinite; }
-
-@keyframes driftA {
-    0%, 100% { transform: translate(120px, 70px); }
-    50% { transform: translate(80px, 70px); }
+.success-badge-container {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes driftB {
-    0%, 100% { transform: translate(520px, 45px) scale(.75); }
-    50% { transform: translate(565px, 45px) scale(.75); }
+.success-badge-outer-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px dashed rgba(16, 185, 129, 0.4);
+  animation: rotateRing 15s linear infinite;
 }
 
-@keyframes driftC {
-    0%, 100% { transform: translate(880px, 90px) scale(.85); }
-    50% { transform: translate(840px, 90px) scale(.85); }
+@keyframes rotateRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-/* -------- warehouse -------- */
-
-.warehouse-sign {
-    font-size: 20px;
-    font-weight: 900;
-    fill: white;
+.success-badge-inner {
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+  animation: badgePop 0.7s cubic-bezier(0.17, 0.67, 0.32, 1.4);
 }
 
-.warehouse-window {
-    animation: windowFlicker 3.2s ease-in-out infinite;
-}
-
-@keyframes windowFlicker {
-    0%, 100% { fill: #101c34; }
-    50% { fill: #1c2c50; }
-}
-
-/* -------- road -------- */
-
-.road-dashes-track {
-    animation-play-state: paused;
-}
-
-.stage-shipping .road-dashes-track {
-    animation: roadScroll 1.1s linear infinite;
-    animation-play-state: running;
-}
-
-@keyframes roadScroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-1440px); }
-}
-
-/* -------- package -------- */
-
-.package-group {
-    opacity: 0;
-    transform-box: fill-box;
-    transform-origin: center;
-}
-
-.stage-packing .package-group {
-    animation: packageIn 1.1s cubic-bezier(.34, 1.56, .64, 1) forwards;
-    animation-delay: .3s;
-}
-
-.stage-loading .package-group {
-    opacity: 1;
-    animation: packageLoad 1.3s ease-in forwards;
-}
-
-@keyframes packageIn {
-    0% { opacity: 0; transform: translateY(50px) scale(.4); }
-    70% { opacity: 1; transform: translateY(-6px) scale(1.05); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-@keyframes packageLoad {
-    0% { opacity: 1; transform: translate(0, 0) scale(1); }
-    100% { opacity: 0; transform: translate(110px, -8px) scale(.6); }
-}
-
-.package-shadow { fill: rgba(0, 0, 0, .35); }
-
-.package-label {
-    font-size: 12px;
-    font-weight: 800;
-    fill: rgba(80, 40, 0, .55);
-}
-
-/* -------- truck -------- */
-
-.truck-anim {
-    transform: translateX(0);
-    opacity: 0;
-}
-
-.stage-packing .truck-anim { opacity: 0; }
-
-.stage-loading .truck-anim {
-    animation: truckAppear .6s ease forwards;
-}
-
-.stage-shipping .truck-anim {
-    opacity: 1;
-    animation: truckDrive 4.4s cubic-bezier(.5, 0, .25, 1) forwards;
-}
-
-.stage-arrived .truck-anim,
-.stage-success .truck-anim {
-    opacity: 1;
-    transform: translateX(300px);
-}
-
-@keyframes truckAppear {
-    from { opacity: 0; transform: translateX(-20px); }
-    to { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes truckDrive {
-    0% { transform: translateX(0) translateY(0); }
-    12% { transform: translateX(24px) translateY(-3px); }
-    28% { transform: translateX(70px) translateY(1px); }
-    50% { transform: translateX(150px) translateY(-2px); }
-    75% { transform: translateX(230px) translateY(1px); }
-    100% { transform: translateX(300px) translateY(0); }
-}
-
-.truck-logo { font-size: 15px; font-weight: 800; fill: white; }
-
-.headlight { opacity: .5; }
-.stage-shipping .headlight,
-.stage-arrived .headlight { opacity: 1; filter: drop-shadow(0 0 6px #ffe27a); }
-
-.wheel { transform-box: fill-box; transform-origin: center; }
-.stage-shipping .wheel {
-    animation: wheelSpin .4s linear infinite;
-}
-
-@keyframes wheelSpin {
-    to { transform: rotate(360deg); }
-}
-
-.speed-lines { opacity: 0; }
-.stage-shipping .speed-lines {
-    opacity: .7;
-    animation: speedFlicker .3s linear infinite;
-}
-
-@keyframes speedFlicker {
-    0%, 100% { opacity: .3; }
-    50% { opacity: .8; }
-}
-
-/* -------- destination -------- */
-
-.destination { opacity: .3; }
-
-.pin-glow { opacity: 0; }
-
-.stage-arrived .destination,
-.stage-success .destination {
-    opacity: 1;
-    animation: pinBounce .9s cubic-bezier(.34, 1.56, .64, 1);
-}
-
-.stage-arrived .pin-glow,
-.stage-success .pin-glow {
-    opacity: 1;
-    animation: pinPulse 1.4s ease-in-out infinite;
-}
-
-@keyframes pinBounce {
-    0% { transform: translateY(-24px) scale(.6); }
-    60% { transform: translateY(4px) scale(1.08); }
-    100% { transform: translateY(0) scale(1); }
-}
-
-@keyframes pinPulse {
-    0%, 100% { opacity: .5; transform: scale(1); }
-    50% { opacity: .9; transform: scale(1.12); }
+@keyframes badgePop {
+  0% { transform: scale(0); opacity: 0; }
+  70% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 /* =========================================
-   MESSAGE
+   LIVE DELIVERY TRACKER CARD
 ========================================= */
 
-.success-content {
-    position: relative;
-    z-index: 20;
-    text-align: center;
-    max-width: 650px;
-    margin-top: 35px;
+.delivery-tracker-card {
+  border-radius: 28px;
+  background: rgba(18, 24, 43, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 25px rgba(99, 102, 241, 0.12);
+  padding: 24px 28px;
+  animation: cardSlideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
 }
 
-.eyebrow {
-    color: #60a5fa;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 4px;
-    margin-bottom: 10px;
+@keyframes cardSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.success-content h1 { font-size: clamp(28px, 5vw, 48px); font-weight: 900; margin: 0; }
-.success-description { margin-top: 12px; color: rgba(255, 255, 255, .55); }
-
-.loading-ring {
-    width: 35px;
-    height: 35px;
-    border: 3px solid rgba(255, 255, 255, .1);
-    border-top-color: #60a5fa;
-    border-radius: 50%;
-    margin: 0 auto 20px;
-    animation: spin .8s linear infinite;
+.step-node {
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* -------- final success -------- */
-
-.final-success {
-    margin-top: -420px;
-    animation: finalReveal 1s cubic-bezier(.16, 1, .3, 1) forwards;
+.step-icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
 }
 
-@keyframes finalReveal {
-    from { opacity: 0; transform: translateY(30px) scale(.92); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+.step-node.active .step-icon-wrap {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.5);
+  color: #34d399;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.35);
 }
 
-.success-check {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 25px;
-    filter: drop-shadow(0 0 20px rgba(16, 185, 129, .5));
-    animation: successPop .8s cubic-bezier(.17, .67, .32, 1.3);
+.step-node.current .step-icon-wrap {
+  background: linear-gradient(135deg, #6366f1, #06b6d4);
+  border-color: #a5b4fc;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+  animation: pulseCurrent 2s infinite;
 }
 
-@keyframes successPop {
-    0% { transform: scale(0); }
-    70% { transform: scale(1.15); }
-    100% { transform: scale(1); }
+@keyframes pulseCurrent {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
 }
 
-.success-check svg { width: 100%; height: 100%; }
-.success-check circle { fill: rgba(16, 185, 129, .15); stroke: #10b981; stroke-width: 2; }
+/* =========================================
+   RECEIPT GLASS CARDS
+========================================= */
 
-.success-check path {
-    fill: none;
-    stroke: #34d399;
-    stroke-width: 4;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 60;
-    stroke-dashoffset: 60;
-    animation: drawCheck .7s ease .3s forwards;
+.receipt-glass-card {
+  border-radius: 28px;
+  background: rgba(18, 24, 43, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
 
-@keyframes drawCheck { to { stroke-dashoffset: 0; } }
+/* =========================================
+   PRINT STYLESHEET
+========================================= */
 
-.final-success h1 span { color: #34d399; }
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
 
-.final-success > p:not(.eyebrow) {
-    max-width: 550px;
-    margin: 15px auto;
-    color: rgba(255, 255, 255, .55);
-    line-height: 1.7;
-}
+  .order-success-clean-page {
+    background: #ffffff !important;
+    color: #000000 !important;
+    padding: 0 !important;
+  }
 
-.success-actions {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 28px;
-    flex-wrap: wrap;
+  .bg-glow, .btn, .delivery-tracker-card {
+    display: none !important;
+  }
+
+  .receipt-glass-card {
+    background: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: none !important;
+  }
+
+  .text-white {
+    color: #000000 !important;
+  }
+
+  .text-white\/70, .text-white\/50, .text-white\/60, .text-white\/40 {
+    color: #475569 !important;
+  }
 }
 
 /* =========================================
    RESPONSIVE
 ========================================= */
 
-@media (max-width: 700px) {
-    .order-success-page { padding: 25px 12px; }
+@media (max-width: 640px) {
+  .order-success-clean-page {
+    padding: 24px 12px 60px;
+  }
 
-    .order-status {
-        transform: scale(.78);
-        width: 125%;
-        margin-left: -12.5%;
-    }
+  .delivery-tracker-card {
+    padding: 20px 16px;
+  }
 
-    .status-line { width: 35px; }
-
-    .delivery-scene { height: 300px; border-radius: 25px; }
-
-    .final-success { margin-top: -300px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .cloud, .warehouse-window, .wheel, .speed-lines, .road-dashes-track,
-    .package-group, .truck-anim, .destination, .pin-glow {
-        animation: none !important;
-    }
+  .receipt-glass-card {
+    padding: 18px;
+    border-radius: 22px;
+  }
 }
